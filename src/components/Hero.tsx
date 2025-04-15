@@ -1,9 +1,10 @@
+
 import { Button } from "@/components/ui/button";
 import HeroCarousel from "./HeroCarousel";
 
 const Hero = () => {
   return (
-    <section className="pt-28 pb-20 md:pt-40 md:pb-28 relative overflow-hidden">
+    <section className="pt-20 pb-12 md:pt-32 md:pb-16 relative overflow-hidden min-h-[90vh]">
       {/* Background with gradient overlay */}
       <div className="absolute inset-0 bg-buildrunners-neutral-100 opacity-90 z-0"></div>
       
@@ -13,7 +14,7 @@ const Hero = () => {
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="flex flex-col md:grid md:grid-cols-2 gap-12 items-center">
           {/* Mobile: Carousel appears first */}
-          <div className="w-full md:hidden animate-fade-in-1 mb-8">
+          <div className="w-full aspect-square md:hidden animate-fade-in-1 mb-8">
             <HeroCarousel />
           </div>
 
@@ -37,7 +38,9 @@ const Hero = () => {
           {/* Desktop: Carousel appears on the right */}
           <div className="hidden md:block relative animate-fade-in-2">
             <div className="absolute -top-10 -left-10 w-40 h-40 bg-buildrunners-orange/10 rounded-full"></div>
-            <HeroCarousel />
+            <div className="aspect-square">
+              <HeroCarousel />
+            </div>
           </div>
         </div>
       </div>
