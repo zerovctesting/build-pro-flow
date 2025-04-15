@@ -61,6 +61,30 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				buildrunners: {
+					blue: {
+						DEFAULT: '#0F5987',
+						light: '#2E79A5',
+						dark: '#0A4262'
+					},
+					gray: {
+						DEFAULT: '#4A5568',
+						light: '#A0AEC0',
+						dark: '#2D3748'
+					},
+					orange: {
+						DEFAULT: '#E17614',
+						light: '#F5A353',
+						dark: '#BA5F0E'
+					},
+					neutral: {
+						100: '#F7FAFC',
+						200: '#EDF2F7',
+						300: '#E2E8F0',
+						800: '#1A202C',
+						900: '#171923'
+					}
 				}
 			},
 			borderRadius: {
