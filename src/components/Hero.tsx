@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import HeroCarousel from "./HeroCarousel";
 
 const Hero = () => {
   return (
@@ -12,7 +13,12 @@ const Hero = () => {
       <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-br from-buildrunners-blue-light/30 to-transparent rounded-bl-[100px] z-0"></div>
       
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="flex flex-col md:grid md:grid-cols-2 gap-12 items-center">
+          {/* Mobile: Carousel appears first */}
+          <div className="w-full md:hidden animate-fade-in-1 mb-8">
+            <HeroCarousel />
+          </div>
+
           <div className="animate-fade-in-1">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-buildrunners-neutral-900 leading-tight text-shadow mb-4">
               Never Waste Time at the Store Again.
@@ -34,18 +40,10 @@ const Hero = () => {
             </div>
           </div>
           
-          <div className="relative animate-fade-in-2">
+          {/* Desktop: Carousel appears on the right */}
+          <div className="hidden md:block relative animate-fade-in-2">
             <div className="absolute -top-10 -left-10 w-40 h-40 bg-buildrunners-orange/10 rounded-full"></div>
-            <div className="relative bg-white shadow-xl rounded-lg overflow-hidden">
-              <img 
-                src="https://images.unsplash.com/photo-1574746436509-97c409a267c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" 
-                alt="Contractor receiving materials on-site" 
-                className="w-full h-auto object-cover"
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-buildrunners-blue to-transparent p-6">
-                <p className="text-white font-medium">Materials delivered right when you need them.</p>
-              </div>
-            </div>
+            <HeroCarousel />
           </div>
         </div>
       </div>
