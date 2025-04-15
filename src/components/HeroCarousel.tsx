@@ -1,11 +1,13 @@
 
+import * as React from "react";
+import { Circle, CircleDot } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
+import useEmblaCarousel from "embla-carousel-react";
+import { useEffect } from "react";
 
 const images = [
   {
@@ -23,27 +25,68 @@ const images = [
 ];
 
 const HeroCarousel = () => {
+  const [api] = useEmblaCarousel({ loop: true });
+  const [currentSlide, setCurrentSlide] = React.useState(0);
+
+  useEffect(() => {
+    if (!api) return;
+
+    api.on('select', () => {
+      setCurrentSlide(api.selectedScrollSnap());
+    });
+
+    // Auto-rotate every 1.8 seconds
+    const autoplayInterval = setInterval(() => {
+      if (api.canScrollNext()) {
+        api.scrollNext();
+      } else {
+        api.scrollTo(0);
+      }
+    }, 1800);
+
+    return () => {
+      clearInterval(autoplayInterval);
+    };
+  }, [api]);
+
   return (
-    <Carousel className="w-full">
-      <CarouselContent>
-        {images.map((image, index) => (
-          <CarouselItem key={index}>
-            <div className="relative bg-white shadow-xl rounded-lg overflow-hidden aspect-[16/9]">
-              <img
-                src={image.url}
-                alt={image.alt}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-buildrunners-blue to-transparent p-6">
-                <p className="text-white font-medium">{image.alt}</p>
+    <div className="relative">
+      <Carousel className="w-full" ref={api}>
+        <CarouselContent>
+          {images.map((image, index) => (
+            <CarouselItem key={index}>
+              <div className="relative bg-white shadow-xl rounded-lg overflow-hidden aspect-square">
+                <img
+                  src={image.url}
+                  alt={image.alt}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-buildrunners-blue to-transparent p-6">
+                  <p className="text-white font-medium">{image.alt}</p>
+                </div>
               </div>
-            </div>
-          </CarouselItem>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
+      
+      {/* Carousel indicators */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
+        {images.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => api?.scrollTo(index)}
+            className="focus:outline-none"
+          >
+            {index === currentSlide ? (
+              <CircleDot className="w-4 h-4 text-white" />
+            ) : (
+              <Circle className="w-4 h-4 text-white/60" />
+            )}
+          </button>
         ))}
-      </CarouselContent>
-      <CarouselPrevious className="hidden md:flex" />
-      <CarouselNext className="hidden md:flex" />
-    </Carousel>
+      </div>
+    </div>
   );
 };
 
