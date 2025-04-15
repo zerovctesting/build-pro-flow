@@ -35,8 +35,6 @@ const HeroCarousel = () => {
       setCurrentSlide(api.selectedScrollSnap());
     };
 
-    api.on("select", onSelect);
-
     // Auto-rotate every 1.8 seconds
     const autoplayInterval = setInterval(() => {
       if (api.canScrollNext()) {
@@ -46,6 +44,8 @@ const HeroCarousel = () => {
       }
     }, 1800);
 
+    api.on("select", onSelect);
+
     return () => {
       api.off("select", onSelect);
       clearInterval(autoplayInterval);
@@ -53,12 +53,19 @@ const HeroCarousel = () => {
   }, [api]);
 
   return (
-    <div className="relative">
-      <Carousel className="w-full" opts={{ loop: true }} setApi={setApi}>
-        <CarouselContent>
+    <div className="relative h-full">
+      <Carousel 
+        className="w-full h-full" 
+        opts={{ loop: true }} 
+        setApi={setApi}
+      >
+        <CarouselContent className="h-full">
           {images.map((image, index) => (
-            <CarouselItem key={index}>
-              <div className="relative bg-white shadow-xl rounded-lg overflow-hidden aspect-square">
+            <CarouselItem 
+              key={index} 
+              className="h-full"
+            >
+              <div className="relative bg-white shadow-xl rounded-lg overflow-hidden h-full">
                 <img
                   src={image.url}
                   alt={image.alt}
