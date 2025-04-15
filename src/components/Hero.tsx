@@ -1,6 +1,4 @@
-
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
 import HeroCarousel from "./HeroCarousel";
 
 const Hero = () => {
@@ -32,10 +30,6 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <Button className="bg-buildrunners-blue hover:bg-buildrunners-blue-dark text-white px-6 py-6 text-lg">
                 Apply for Pro Access
-              </Button>
-              <Button variant="outline" className="border-buildrunners-gray text-buildrunners-gray hover:bg-buildrunners-gray hover:text-white px-6 py-6 text-lg">
-                Browse Catalog
-                <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
           </div>

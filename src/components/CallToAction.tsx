@@ -1,6 +1,4 @@
-
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
 
 const CallToAction = () => {
   return (
@@ -21,10 +19,6 @@ const CallToAction = () => {
           <div className="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in-2">
             <Button className="bg-white text-buildrunners-blue-dark hover:bg-buildrunners-neutral-200 px-8 py-6 text-lg font-medium">
               Apply for Pro Access
-            </Button>
-            <Button variant="outline" className="border-white text-white hover:bg-white/10 px-8 py-6 text-lg font-medium">
-              Browse Catalog
-              <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
           
