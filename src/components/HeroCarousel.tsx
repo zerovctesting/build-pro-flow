@@ -37,10 +37,10 @@ const HeroCarousel = () => {
 
     // Auto-rotate every 1.8 seconds
     const autoplayInterval = setInterval(() => {
-      if (api.canScrollNext()) {
+      if (api?.canScrollNext()) {
         api.scrollNext();
       } else {
-        api.scrollTo(0);
+        api?.scrollTo(0);
       }
     }, 1800);
 
