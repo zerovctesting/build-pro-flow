@@ -6,8 +6,8 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import useEmblaCarousel from "embla-carousel-react";
-import { useEffect } from "react";
+import { type CarouselApi } from "@/components/ui/carousel/carousel-types";
+import { useEffect, useState } from "react";
 
 const images = [
   {
@@ -25,33 +25,36 @@ const images = [
 ];
 
 const HeroCarousel = () => {
-  const [api] = useEmblaCarousel({ loop: true });
-  const [currentSlide, setCurrentSlide] = React.useState(0);
+  const [api, setApi] = useState<CarouselApi | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     if (!api) return;
 
-    api.on('select', () => {
+    const onSelect = () => {
       setCurrentSlide(api.selectedScrollSnap());
-    });
+    };
+
+    api.on("select", onSelect);
 
     // Auto-rotate every 1.8 seconds
     const autoplayInterval = setInterval(() => {
-      if (api?.canScrollNext()) {
+      if (api.canScrollNext()) {
         api.scrollNext();
       } else {
-        api?.scrollTo(0);
+        api.scrollTo(0);
       }
     }, 1800);
 
     return () => {
+      api.off("select", onSelect);
       clearInterval(autoplayInterval);
     };
   }, [api]);
 
   return (
     <div className="relative">
-      <Carousel className="w-full" ref={api}>
+      <Carousel className="w-full" opts={{ loop: true }} setApi={setApi}>
         <CarouselContent>
           {images.map((image, index) => (
             <CarouselItem key={index}>
